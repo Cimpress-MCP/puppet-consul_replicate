@@ -2,7 +2,7 @@
 
 ## Overview
 
-This module installs consul replicate as a service. Check README.md for details and OS support.
+This module installs consul replicate as a service.
 
 More information about usage of consul-replicate can be found on https://github.com/hashicorp/consul-replicate
 
