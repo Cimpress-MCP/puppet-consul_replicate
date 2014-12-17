@@ -4,8 +4,9 @@ module Puppet::Parser::Functions
     param = ''
 
     hash.each do |key, val|
-      if not val.empty?
+      if not val.empty? then
         param += "-#{key} #{val} "
+      end
     end
 
     return param
