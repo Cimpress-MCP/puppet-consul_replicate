@@ -1,6 +1,6 @@
 class consul_replicate::install {
   
-  exec { "Stop consul-replicate service if it's running":
+  exec { "Stop consul-replicate service if it is running":
     command => "sudo service consul-replicate stop",
     path    => '/usr/bin:/usr/local/bin:/bin',
     onlyif  => "sudo service consul-replicate | grep running",

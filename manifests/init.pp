@@ -7,9 +7,9 @@ class consul_replicate (
   $src,
   $status       = '',
   $token        = '',
-  $bin_dir      = $consul::params::bin_dir,
-  $version      = $consul::params::version,
-  $download_url = $consul::params::download_url,
+  $bin_dir      = $consul_replicate::params::bin_dir,
+  $version      = $consul_replicate::params::version,
+  $download_url = $consul_replicate::params::download_url,
   $user         = 'creplicate',
   $group        = 'creplicate',
 ) inherits consul_replicate::params {
