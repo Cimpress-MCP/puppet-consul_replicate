@@ -29,11 +29,11 @@ class consul_replicate::configure {
     require => File["${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}"],
   }
 
-  group { $fsconsul::group:
+  group { $consul_replicate::group:
     ensure => present
   }
 
-  user { $fsconsul::user:
+  user { $consul_replicate::user:
     ensure  => present,
   }
 }
