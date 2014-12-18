@@ -1,0 +1,3 @@
+fixtures:
+  symlinks:
+    consul_replicate: "#{source_dir}"
