@@ -1,4 +1,5 @@
 # puppet-consul_replicate
+[![Build Status](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate.svg)](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate)
 
 ## Overview
 
