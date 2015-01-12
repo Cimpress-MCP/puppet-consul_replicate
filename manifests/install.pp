@@ -7,11 +7,6 @@ class consul_replicate::install {
     notify  => Service['consul-replicate'],
   } ->
 
-  exec { 'Check for binary presence':
-    command => "/usr/bin/test -e ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
-    path    => '/usr/bin:/usr/local/bin:/bin',
-  } ->
-
   file { "${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}":
     ensure => file,
     owner  => 'root',
