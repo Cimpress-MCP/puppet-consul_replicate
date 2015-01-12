@@ -44,9 +44,7 @@ describe 'consul_replicate' do
       :version => '0.1.0'
     }}
 
-    it { should contain_exec('Stop consul-replicate service if it is running') }
-    it { should contain_exec('Download consul-replicate binary').that_requires('Exec[Stop consul-replicate service if it is running]') }
-    it { should contain_exec('Check for binary presence').that_requires('Exec[Download consul-replicate binary]') }
+    it { should contain_exec('Download consul-replicate binary') }
 
     it { should contain_file('/usr/local/bin/consul-replicate-0.1.0') }
     it { should contain_file('/usr/local/bin/consul-replicate') }
