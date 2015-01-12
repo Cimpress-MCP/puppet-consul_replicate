@@ -1,15 +1,10 @@
 class consul_replicate::install {
   
-  exec { 'Stop consul-replicate service if it is running':
-    command => 'sudo service consul-replicate stop',
-    path    => '/usr/bin:/usr/local/bin:/bin',
-    onlyif  => 'sudo service consul-replicate | grep running',
-  } ->
-
   exec { 'Download consul-replicate binary':
-    command => "sudo wget -q --no-check-certificate ${consul_replicate::download_url} -O ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version} || sudo rm -f ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
+    command => "wget -q --no-check-certificate ${consul_replicate::download_url} -O ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
     path    => '/usr/bin:/usr/local/bin:/bin',
     creates => "${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
+    notify  => Service['consul-replicate'],
   } ->
 
   exec { 'Check for binary presence':
