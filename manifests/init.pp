@@ -15,14 +15,14 @@ class consul_replicate (
 ) inherits consul_replicate::params {
 
   $options_hash  = {
-    addr        => $addr,
-   'dst-prefix' => $dst_prefix,
-    lock        => $lock,
-    prefix      => $prefix,
-    service     => $service,
-    src         => $src,
-    status      => $status,
-    token       => $token,
+    addr         => $addr,
+    'dst-prefix' => $dst_prefix,
+    lock         => $lock,
+    prefix       => $prefix,
+    service      => $service,
+    src          => $src,
+    status       => $status,
+    token        => $token,
   }
   
   # Build options string
