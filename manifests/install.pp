@@ -3,7 +3,7 @@ class consul_replicate::install {
   exec { 'Download consul-replicate binary':
     command => "wget -q --no-check-certificate ${consul_replicate::download_url} -O ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
     path    => '/usr/bin:/usr/local/bin:/bin',
-    creates => "${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
+    unless  => "test -s ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
     notify  => Service['consul-replicate'],
   } ->
 
