@@ -1,0 +1,15 @@
+# Consul-replicate Agent (Upstart unit)
+description "Consul-replicate Agent"
+start on runlevel [2345]
+stop on runlevel [!2345]
+setuid <%= scope.lookupvar('consul_replicate::user') %>
+setgid <%= scope.lookupvar('consul_replicate::group') %>
+chdir <%= scope.lookupvar('consul_replicate::bin_dir') %>
+
+respawn
+respawn limit 10 10
+kill timeout 10
+
+script
+	exec consul-replicate <%= scope.lookupvar('consul_replicate::options') %> -config-dir <%= scope.lookupvar('consul_replicate::config_dir') %>
+end script
