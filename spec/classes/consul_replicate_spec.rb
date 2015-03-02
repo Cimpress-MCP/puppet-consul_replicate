@@ -25,8 +25,8 @@ describe 'consul_replicate' do
     it { expect { should compile }.to raise_error(/Unsupported operating system:/) }
   end
 
-  context 'when not specifying a src' do
-    it { expect { should compile }.to raise_error(/Must pass src/) }
+  context 'when not specifying consul address' do
+    it { expect { should compile }.to raise_error(/Must pass consul address/) }
   end
 
   context 'by default, a user and group should be installed' do
@@ -55,7 +55,7 @@ describe 'consul_replicate' do
       :src => 'dc1'
     }}
 
-    it { should contain_class('consul_replicate::params') }   
+    it { should contain_class('consul_replicate::params') }
 
     it { should contain_class('consul_replicate::install') }
     it { should contain_class('consul_replicate::run_service').that_subscribes_to('consul_replicate::install') }
@@ -65,7 +65,7 @@ describe 'consul_replicate' do
 
   end
 
-  context 'on Ubuntu 14.04 base OS' do 
+  context 'on Ubuntu 14.04 base OS' do
     let(:params) {{
       :src => 'dc1'
     }}

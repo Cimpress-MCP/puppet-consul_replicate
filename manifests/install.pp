@@ -2,10 +2,16 @@
 class consul_replicate::install {
 
   exec { 'Download consul-replicate binary':
-    command => "wget -q --no-check-certificate ${consul_replicate::download_url} -O ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
-    path    => '/usr/bin:/usr/local/bin:/bin',
+    command => "wget -q --no-check-certificate ${consul_replicate::download_url} -O /tmp/consul-replicate-${consul_replicate::version}.tar.gz",
+    path    => $::path,
     unless  => "test -s ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
-    notify  => Service['consul-replicate'],
+  } ->
+
+  exec { 'Extract consul-replicate binary':
+    command     => "tar -xvf /tmp/consul-replicate-${consul_replicate::version}.tar.gz -C ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version} --strip=1",
+    path        => $::path,
+    refreshonly => true,
+    notify      => Service['consul-replicate'],
   } ->
 
   file { "${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}":
@@ -35,7 +41,7 @@ class consul_replicate::install {
     owner  => root,
     group  => root,
     mode   => '0755',
-  }
+  } ->
 
   file { "${consul::config_dir}/config.json":
     notify  => Service['consul-replicate'],
