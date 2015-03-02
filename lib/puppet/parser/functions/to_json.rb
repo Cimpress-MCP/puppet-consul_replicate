@@ -7,7 +7,7 @@ def hash_to_json (hash, json, depth)
   # we want to maintain the same json output to avoid triggering refresh events
   # so we have to sort the hash in order
   hash = hash.sort
-  json = "{ \n"
+  json = "{\n"
   hash.each_with_index do |(key, value), index|
     # Convert the key to a quoted string
     key = key.inspect

@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe 'consul_replicate' do
+
+  Puppet[:parser] = 'future'
+
   RSpec.configure do |c|
     c.default_facts = {
       :architecture    => 'amd64',
@@ -20,9 +23,15 @@ describe 'consul_replicate' do
 
   context 'on an unsupported arch' do
     let(:facts) {{ :architecture => 'bogus' }}
-    let(:params) do
-      default_params
-    end
+    let(:params) {{
+      :config_hash => {
+        :consul => "127.0.0.1:8500",
+        :prefix => {
+          :source => "global@dc1"
+        }
+      }
+    }}
+
     it { expect { should compile }.to raise_error(/Unsupported kernel architecture:/) }
   end
 
@@ -31,6 +40,7 @@ describe 'consul_replicate' do
     let(:params) do
       default_params
     end
+
     it { expect { should compile }.to raise_error(/Unsupported operating system:/) }
   end
 
