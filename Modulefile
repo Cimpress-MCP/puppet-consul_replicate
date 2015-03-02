@@ -1,5 +1,5 @@
 name 'cimpressmcp-consul_replicate'
-version '0.0.1'
+version '0.2.0'
 
 author 'Calvin Leung Huang'
 license 'Apache2'

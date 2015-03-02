@@ -1,3 +1,4 @@
+# See README.md for details
 class consul_replicate::params {
   $version = '0.1.0'
 
@@ -10,6 +11,7 @@ class consul_replicate::params {
   case $::operatingsystem {
     ubuntu: {
       $bin_dir      = '/usr/local/bin'
+      $config_dir   = '/etc/consul_replicate'
       $download_url = "https://github.com/hashicorp/consul-replicate/releases/download/v${version}/consul-replicate_linux_${arch}"
     }
     default: { fail("Unsupported operating system: ${::operatingsystem}") }
