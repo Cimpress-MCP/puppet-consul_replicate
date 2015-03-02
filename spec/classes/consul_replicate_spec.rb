@@ -9,40 +9,48 @@ describe 'consul_replicate' do
     }
   end
 
+  let :default_params do {
+    :config_hash => {
+      :consul => "127.0.0.1:8500",
+      :prefix => {
+        :source => "global@dc1"
+      }
+    }
+  } end
+
   context 'on an unsupported arch' do
     let(:facts) {{ :architecture => 'bogus' }}
-    let(:params) {{
-      :src => 'dc1'
-    }}
+    let(:params) do
+      default_params
+    end
     it { expect { should compile }.to raise_error(/Unsupported kernel architecture:/) }
   end
 
   context 'on an unsupported operating system' do
     let(:facts) {{ :operatingsystem => 'bogus' }}
-    let(:params) {{
-      :src => 'dc1'
-    }}
+    let(:params) do
+      default_params
+    end
     it { expect { should compile }.to raise_error(/Unsupported operating system:/) }
   end
 
-  context 'when not specifying consul address' do
-    it { expect { should compile }.to raise_error(/Must pass consul address/) }
+  context 'when not specifying config' do
+    it { expect { should compile }.to raise_error(ArguementError) }
   end
 
   context 'by default, a user and group should be installed' do
-    let(:params) {{
-      :src => 'dc1'
-    }}
+    let(:params) do
+      default_params
+    end
 
     it { should contain_user('creplicate').with(:ensure => :present) }
     it { should contain_group('creplicate').with(:ensure => :present) }
   end
 
   context 'when trying to install the binary to the system' do
-    let(:params) {{
-      :src => 'dc1',
-      :version => '0.1.0'
-    }}
+    let(:params) do
+      default_params
+    end
 
     it { should contain_exec('Download consul-replicate binary') }
 
@@ -51,9 +59,9 @@ describe 'consul_replicate' do
   end
 
   context 'on any supported operating system' do
-    let(:params) {{
-      :src => 'dc1'
-    }}
+    let(:params) do
+      default_params
+    end
 
     it { should contain_class('consul_replicate::params') }
 
@@ -66,9 +74,9 @@ describe 'consul_replicate' do
   end
 
   context 'on Ubuntu 14.04 base OS' do
-    let(:params) {{
-      :src => 'dc1'
-    }}
+    let(:params) do
+      default_params
+    end
 
     it { should contain_file('/etc/init/consul-replicate.conf').with_content(/exec consul-replicate/) }
     it { should contain_file('/etc/init.d/consul-replicate') }
