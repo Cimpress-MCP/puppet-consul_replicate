@@ -11,7 +11,7 @@ class consul_replicate::install {
     command     => "tar -xvf /tmp/consul-replicate-${consul_replicate::version}.tar.gz -C /tmp/ --strip=1 && mv -f /tmp/consul-replicate ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
     path        => $::path,
     refreshonly => true,
-    subscribe   => Exec['Download consul-replicate binary']
+    subscribe   => Exec['Download consul-replicate binary'],
     notify      => Service['consul-replicate'],
   } ->
 
