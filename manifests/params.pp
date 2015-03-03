@@ -1,5 +1,6 @@
+# See README.md for details
 class consul_replicate::params {
-  $version = '0.1.0'
+  $version = '0.2.0'
 
   case $::architecture {
     'x86_64', 'amd64': { $arch = 'amd64' }
@@ -10,7 +11,8 @@ class consul_replicate::params {
   case $::operatingsystem {
     ubuntu: {
       $bin_dir      = '/usr/local/bin'
-      $download_url = "https://github.com/hashicorp/consul-replicate/releases/download/v${version}/consul-replicate_linux_${arch}"
+      $config_dir   = '/etc/consul_replicate'
+      $download_url = "https://github.com/hashicorp/consul-replicate/releases/download/v${version}/consul-replicate_${version}_linux_${arch}.tar.gz"
     }
     default: { fail("Unsupported operating system: ${::operatingsystem}") }
   }
