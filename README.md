@@ -1,6 +1,6 @@
 puppet-consul_replicate
 =======================
-[![Latest Version](http://img.shields.io/github/release/Cimpress-MCP/puppet-consul_replicate.svg?style=flat-square)][release]
+[![Latest Version](http://img.shields.io/github/release/Cimpress-MCP/puppet-consul_replicate.svg?style=flat-square)
 [![Build Status](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate.svg)](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate)
 
 

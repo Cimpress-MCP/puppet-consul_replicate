@@ -70,6 +70,7 @@ describe 'consul_replicate' do
     end
 
     it{ should contain_exec('Extract consul-replicate binary') }
+    it{ should contain_file('/etc/consul_replicate')}
     it{ should contain_file('/etc/consul_replicate/config.json')}
   end
 
