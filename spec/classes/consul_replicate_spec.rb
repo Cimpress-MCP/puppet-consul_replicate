@@ -14,23 +14,19 @@ describe 'consul_replicate' do
 
   let :default_params do {
     :config_hash => {
-      :consul => "127.0.0.1:8500",
-      :prefix => {
-        :source => "global@dc1"
+      'consul' => "127.0.0.1:8500",
+      'prefix' => {
+        'source' => "global@dc1"
       }
     }
-  } end
+  }
+  end
 
   context 'on an unsupported arch' do
     let(:facts) {{ :architecture => 'bogus' }}
-    let(:params) {{
-      :config_hash => {
-        :consul => "127.0.0.1:8500",
-        :prefix => {
-          :source => "global@dc1"
-        }
-      }
-    }}
+    let(:params) do
+      default_params
+    end
 
     it { expect { should compile }.to raise_error(/Unsupported kernel architecture:/) }
   end
@@ -45,7 +41,7 @@ describe 'consul_replicate' do
   end
 
   context 'when not specifying config' do
-    it { expect { should compile }.to raise_error(ArguementError) }
+    it { expect { should compile }.to raise_error(/Must pass config_hash to Class\[Consul_replicate\]/) }
   end
 
   context 'by default, a user and group should be installed' do
