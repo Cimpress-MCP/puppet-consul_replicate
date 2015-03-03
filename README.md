@@ -1,7 +1,11 @@
 puppet-consul_replicate
 =======================
-[![Latest Version](http://img.shields.io/github/release/Cimpress-MCP/puppet-consul_replicate.svg?style=flat-square)
-[![Build Status](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate.svg)](https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate)
+[![Latest Version](http://img.shields.io/github/release/Cimpress-MCP/puppet-consul_replicate.svg?style=flat-square)][release]
+[![Build Status](http://img.shields.io/travis/Cimpress-MCP/puppet-consul_replicate.svg?style=flat-square)][travis]
+
+
+[release]: https://github.com/Cimpress-MCP/puppet-consul_replicate/releases
+[travis]: https://travis-ci.org/Cimpress-MCP/puppet-consul_replicate
 
 
 
@@ -9,7 +13,7 @@ This module installs consul replicate as a service.
 
 The module has been updated to work with consul-replicate 0.2.0. For usage with consul-replicate 0.1.0, use the module tagged on the [release page](https://github.com/Cimpress-MCP/puppet-consul_replicate/releases) on GitHub
 
-More information about usage of consul-replicate can be found on https://github.com/hashicorp/consul-replicate
+More information about usage of consul-replicate can be found [here](https://github.com/hashicorp/consul-replicate)
 
 Usage
 -----
@@ -37,7 +41,9 @@ What this module affects
 Dependencies
 ------------
 
-Since consul-replicate requires a consul agent to be running, the service that this module creates assumes that a consul agent is running on the machine
+Since consul-replicate requires a consul agent to be running, the service that this module creates assumes that a consul agent is running on the machine.
+
+The module also depends on a [puppet-stdlib](https://github.com/puppetlabs/puppetlabs-stdlib) 0.4.x or above.
 
 Compatibility
 -------------

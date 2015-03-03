@@ -9,6 +9,7 @@ class consul_replicate (
   $group        = 'creplicate',
 ) inherits consul_replicate::params {
 
+  class { 'consul_replicate::populate_hash': } ->
   class { 'consul_replicate::install': } ~>
   class { 'consul_replicate::run_service': } ->
   Class['consul_replicate']
