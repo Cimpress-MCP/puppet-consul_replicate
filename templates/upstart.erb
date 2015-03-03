@@ -11,5 +11,5 @@ respawn limit 10 10
 kill timeout 10
 
 script
-	exec consul-replicate <%= scope.lookupvar('consul_replicate::options') %> -config-dir <%= scope.lookupvar('consul_replicate::config_dir') %>
+	exec consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %>
 end script

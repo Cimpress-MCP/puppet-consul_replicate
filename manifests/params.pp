@@ -12,7 +12,7 @@ class consul_replicate::params {
     ubuntu: {
       $bin_dir      = '/usr/local/bin'
       $config_dir   = '/etc/consul_replicate'
-      $download_url = "https://github.com/hashicorp/consul-replicate/releases/download/v${version}/consul-replicate_linux_${arch}"
+      $download_url = "https://github.com/hashicorp/consul-replicate/releases/download/v${version}/consul-replicate_${version}_linux_${arch}.tar.gz"
     }
     default: { fail("Unsupported operating system: ${::operatingsystem}") }
   }
