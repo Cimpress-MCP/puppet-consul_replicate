@@ -53,15 +53,24 @@ describe 'consul_replicate' do
     it { should contain_group('creplicate').with(:ensure => :present) }
   end
 
-  context 'when trying to install the binary to the system' do
+  context 'when trying to download the binary to the system' do
     let(:params) do
       default_params
     end
 
     it { should contain_exec('Download consul-replicate binary') }
 
-    it { should contain_file('/usr/local/bin/consul-replicate-0.1.0') }
+    it { should contain_file('/usr/local/bin/consul-replicate-0.2.0') }
     it { should contain_file('/usr/local/bin/consul-replicate') }
+  end
+
+  context 'when trying to extract the binary to the system' do
+    let(:params) do
+      default_params
+    end
+
+    it{ should contain_exec('Extract consul-replicate binary') }
+    it{ should contain_file('/etc/consul_replicate/config.json')}
   end
 
   context 'on any supported operating system' do

@@ -43,7 +43,7 @@ class consul_replicate::install {
     mode   => '0755',
   } ->
 
-  file { "${consul::config_dir}/config.json":
+  file { "${consul_replicate::config_dir}/config.json":
     notify  => Service['consul-replicate'],
     content => template('consul_replicate/config.json.erb'),
   }

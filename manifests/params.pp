@@ -1,6 +1,6 @@
 # See README.md for details
 class consul_replicate::params {
-  $version = '0.1.0'
+  $version = '0.2.0'
 
   case $::architecture {
     'x86_64', 'amd64': { $arch = 'amd64' }
