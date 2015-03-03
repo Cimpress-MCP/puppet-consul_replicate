@@ -8,7 +8,7 @@ class consul_replicate::install {
   } ->
 
   exec { 'Extract consul-replicate binary':
-    command     => "tar -xvf /tmp/consul-replicate-${consul_replicate::version}.tar.gz --strip=1 && mv -f /tmp/consul-replicate ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
+    command     => "tar -xvf /tmp/consul-replicate-${consul_replicate::version}.tar.gz -C /tmp/ --strip=1 && mv -f /tmp/consul-replicate ${consul_replicate::bin_dir}/consul-replicate-${consul_replicate::version}",
     path        => $::path,
     refreshonly => true,
     notify      => Service['consul-replicate'],
