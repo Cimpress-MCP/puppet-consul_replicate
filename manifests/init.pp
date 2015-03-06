@@ -1,6 +1,6 @@
 # See README.md for details
 class consul_replicate (
-  $config_hash,
+  $config_hash  = {},
   $bin_dir      = $consul_replicate::params::bin_dir,
   $config_dir   = $consul_replicate::params::config_dir,
   $version      = $consul_replicate::params::version,
