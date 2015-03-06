@@ -40,8 +40,26 @@ describe 'consul_replicate' do
     it { expect { should compile }.to raise_error(/Unsupported operating system:/) }
   end
 
-  context 'when not specifying config' do
-    it { expect { should compile }.to raise_error(/Must pass config_hash to Class\[Consul_replicate\]/) }
+  context 'when not specifying consul value in config_hash' do
+    let(:params) {{
+      :config_hash => {
+        'prefix' => {
+          'source' => "global@dc1"
+        }
+      }
+    }}
+
+    it { expect { should compile }.to raise_error(/consul value must be provided/) }
+  end
+
+  context 'when not specifying prefix value in config_hash' do
+    let(:params) {{
+      :config_hash => {
+        'consul' => '127.0.0.1:8500'
+      }
+    }}
+
+    it { expect { should compile }.to raise_error(/prefix value must be provided/) }
   end
 
   context 'by default, a user and group should be installed' do

@@ -31,6 +31,8 @@ class { 'consul_replicate':
 }
 ```
 
+This module supports using hiera for populating `config_hash`. Additionally, there is support for populating the `config_hash` partially via `hiera_config` in class instantiation and via hiera on the same puppet run. However, in that case you would have to use `hiera_config_hash` in your hiera YAML file in order for both hashes to get merged.
+
 What this module affects
 ------------------------
 
