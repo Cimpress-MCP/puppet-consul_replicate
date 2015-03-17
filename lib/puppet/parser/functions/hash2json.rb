@@ -26,8 +26,8 @@ def hash_to_json (hash, json, depth)
           end
           # Concatenate the key and value pair in the correct json format
           json += "#{key.inspect}: #{json2}"
-          # Add trailing comma unless the it is the last KV pair
-          json += "," unless (index + 1) == hash.length
+          # Add trailing comma unless the it is the last KV pair and last item on the array 
+          json += "," unless (index + 1) == hash.length and (i + 1) == value.size
           json += "\n"
         end
         next
