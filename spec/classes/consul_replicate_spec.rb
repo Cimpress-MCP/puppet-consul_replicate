@@ -15,9 +15,9 @@ describe 'consul_replicate' do
   let :default_params do {
     :config_hash => {
       'consul' => "127.0.0.1:8500",
-      'prefix' => {
+      'prefix' => [
         'source' => "global@dc1"
-      }
+      ]
     }
   }
   end
