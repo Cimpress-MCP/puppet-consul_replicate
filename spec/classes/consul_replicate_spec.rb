@@ -98,6 +98,7 @@ describe 'consul_replicate' do
     end
 
     it { should contain_class('consul_replicate::params') }
+    it { should contain_class('consul_replicate::populate_hash') }
 
     it { should contain_class('consul_replicate::install') }
     it { should contain_class('consul_replicate::run_service').that_subscribes_to('consul_replicate::install') }
