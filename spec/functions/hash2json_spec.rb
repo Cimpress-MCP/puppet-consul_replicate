@@ -37,13 +37,16 @@ EOF
 
   expected_out2 = <<-EOF.chop
 {
-\t"prefix": [{
-\t\t"destination": "local/nyc1",
-\t\t"source": "global@nyc1"
-\t},{
-\t\t"destination": "local/nyc2",
-\t\t"source": "global@nyc2"
-\t}]
+\t"prefix": [
+\t\t{
+\t\t\t"destination": "local/nyc1",
+\t\t\t"source": "global@nyc1"
+\t\t},
+\t\t{
+\t\t\t"destination": "local/nyc2",
+\t\t\t"source": "global@nyc2"
+\t\t}
+\t]
 }
 EOF
 

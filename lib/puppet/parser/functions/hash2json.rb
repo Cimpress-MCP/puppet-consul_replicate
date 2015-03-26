@@ -16,13 +16,24 @@ def hash_to_json (hash, json, depth)
     # If the value pair is an array build a new json string recursively
     # and concatenate it with brackets as a string
     if value.is_a?(Array)
-      json2 = ""
+      json_array = ""
+      # Correct indentation
+      json_array += "\n"
+      depth_array = depth + 1
       value.each_with_index do |val, i|
-        json2 += val.inspect if val.is_a?(String)
-        json2 += hash_to_json(val, "", depth + 1) if val.is_a?(Hash)
-        json2 += "," unless i == value.length - 1
+        depth_array.times do
+          json_array += "\t"
+        end
+        json_array += val.inspect if val.is_a?(String)
+        json_array += hash_to_json(val, "", depth_array + 1) if val.is_a?(Hash)
+        json_array += ",\n" unless i == value.length - 1
       end
-      value = "[" + json2 + "]"
+      # Correct indentation
+      json_array += "\n"
+      (depth_array-1).times do
+        json_array += "\t"
+      end
+      value = "[" + json_array + "]"
     end
     # Recurse hash_to_json with one more depth level to build any hashes
     # that exists as a value on the KV pair
