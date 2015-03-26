@@ -9,37 +9,20 @@ def hash_to_json (hash, json, depth)
   hash = hash.sort
   json = "{\n"
   hash.each_with_index do |(key, value), index|
+    # Convert the key to a quoted string
+    key = key.inspect
     # Check for value type and convert to quoted string if it is a string
     value = value.inspect if value.is_a?(String)
     # If the value pair is an array build a new json string recursively
     # and concatenate it with brackets as a string
     if value.is_a?(Array)
-      # consul-replicate specific builder
-      if key == "prefix" or key == "destination"
-        value.each_with_index do |val, i|
-          json2 = ""
-          json2 += val.inspect if val.is_a?(String)
-          json2 += hash_to_json(val, "", depth + 1) if val.is_a?(Hash)
-          # Build json immediately to separate prefix or destination key-value pairs
-          depth.times do
-            json += "\t"
-          end
-          # Concatenate the key and value pair in the correct json format
-          json += "#{key.inspect}: #{json2}"
-          # Add trailing comma unless the it is the last KV pair and last item on the array 
-          json += "," unless (index + 1) == hash.length and (i + 1) == value.size
-          json += "\n"
-        end
-        next
-      else
-        json2 = ""
-        value.each_with_index do |val, i|
-          json2 += val.inspect if val.is_a?(String)
-          json2 += hash_to_json(val, "", depth + 1) if val.is_a?(Hash)
-          json2 += "," unless i == value.length - 1
-        end
-        value = "[" + json2 + "]"
+      json2 = ""
+      value.each_with_index do |val, i|
+        json2 += val.inspect if val.is_a?(String)
+        json2 += hash_to_json(val, "", depth + 1) if val.is_a?(Hash)
+        json2 += "," unless i == value.length - 1
       end
+      value = "[" + json2 + "]"
     end
     # Recurse hash_to_json with one more depth level to build any hashes
     # that exists as a value on the KV pair
@@ -49,7 +32,7 @@ def hash_to_json (hash, json, depth)
       json += "\t"
     end
     # Concatenate the key and value pair in the correct json format
-    json += "#{key.inspect}: #{value}"
+    json += "#{key}: #{value}"
     # Add trailing comma unless the it is the last KV pair
     json += "," unless (index + 1) == hash.length
     json += "\n"
