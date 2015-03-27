@@ -35,7 +35,7 @@ This module supports using hiera for populating `config_hash`. Additionally, the
 
 ### Multi-prefix support
 
-Multi-prefix is supported via an array of hashes. The module will automatically convert the array to JSON supported format to be consumed by consul-replicate
+As of 0.2.0, multi-destination from the same source and multi-prefix is supported via an array of hashes.
 
 ```puppet
 class { 'consul_replicate':
@@ -46,12 +46,16 @@ class { 'consul_replicate':
 				source => 'global@dc1',
 			},
 			{
-				source => 'global@dc2',
+				source      => 'global@dc2',
 				destination => 'default'
 			},
 			{
-				source => 'global@dc3',
-				destination => ['foo', 'bar']
+				source      => 'global@dc3',
+				destination => 'foo'
+			}
+			{
+				source      => 'global@dc3',
+				destination => 'bar'
 			}
 		]
 	}
