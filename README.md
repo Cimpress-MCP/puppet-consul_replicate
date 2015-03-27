@@ -33,6 +33,35 @@ class { 'consul_replicate':
 
 This module supports using hiera for populating `config_hash`. Additionally, there is support for populating the `config_hash` partially via `hiera_config` in class instantiation and via hiera on the same puppet run. However, in that case you would have to use `hiera_config_hash` in your hiera YAML file in order for both hashes to get merged.
 
+### Multi-prefix support
+
+As of 0.2.0, multi-destination from the same source and multi-prefix is supported via an array of hashes.
+
+```puppet
+class { 'consul_replicate':
+	config_hash => {
+		consul => '127.0.0.1:8500',
+		prefix => [
+			{
+				source => 'global@dc1',
+			},
+			{
+				source      => 'global@dc2',
+				destination => 'default'
+			},
+			{
+				source      => 'global@dc3',
+				destination => 'foo'
+			}
+			{
+				source      => 'global@dc3',
+				destination => 'bar'
+			}
+		]
+	}
+}
+```
+
 What this module affects
 ------------------------
 
