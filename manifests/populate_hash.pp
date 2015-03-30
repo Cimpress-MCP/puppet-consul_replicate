@@ -2,6 +2,9 @@
 class consul_replicate::populate_hash {
   $merged_config_hash = merge(hiera_hash('consul_replicate::hiera_config_hash', {}), $consul_replicate::config_hash)
 
+  # Assign token value
+  $acl_token = $merged_config_hash['token']
+
   # Check for consul value in the merged_config_hash
   if !has_key($merged_config_hash, 'consul') {
     fail( 'consul value must be provided in config_hash or hiera_config_hash' )
