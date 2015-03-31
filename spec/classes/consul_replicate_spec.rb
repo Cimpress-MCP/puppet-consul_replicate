@@ -113,7 +113,7 @@ describe 'consul_replicate' do
       default_params
     end
 
-    it { should contain_file('/etc/init/consul-replicate.conf').with_content(/exec consul-replicate/) }
+    it { should contain_file('/etc/init/consul-replicate.conf').with_content(/(exec consul lock).*(consul-replicate)/) }
     it { should contain_file('/etc/init.d/consul-replicate') }
   end
 
