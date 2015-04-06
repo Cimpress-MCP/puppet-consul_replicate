@@ -14,5 +14,5 @@ script
 	if [ -n "<%= scope.lookupvar('consul_replicate::populate_hash::acl_token') %>" ]; then
 		TOKEN_PARAM="-token <%= scope.lookupvar('consul_replicate::populate_hash::acl_token') %>"
 	fi
-	exec consul lock $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %>
+	exec consul lock $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %> -log-level debug
 end script
