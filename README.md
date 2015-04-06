@@ -52,7 +52,7 @@ class { 'consul_replicate':
 			{
 				source      => 'global@dc3',
 				destination => 'foo'
-			}
+			},
 			{
 				source      => 'global@dc3',
 				destination => 'bar'
