@@ -62,6 +62,10 @@ class { 'consul_replicate':
 }
 ```
 
+### Monitoring
+
+This module includes basic sensu checks for monitoring.
+
 What this module affects
 ------------------------
 

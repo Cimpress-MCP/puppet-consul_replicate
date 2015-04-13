@@ -7,6 +7,7 @@ class consul_replicate (
   $download_url = $consul_replicate::params::download_url,
   $user         = 'creplicate',
   $group        = 'creplicate',
+  $sensu_subs   = undef,
 ) inherits consul_replicate::params {
 
   class { 'consul_replicate::populate_hash': } ->
