@@ -10,9 +10,9 @@ class consul_replicate::monitoring::sensu {
     path   => '/etc/sensu/plugins/processes/check-procs.rb'
   }
 
-  file { '/etc/sensu/conf.d/consul_config.json':
+  file { '/etc/sensu/conf.d/consul_replicate_config.json':
     ensure  => file,
     notify  => Service['sensu-client'],
-    content => template('puppet:///modules/consul_replicate/consul_replicate_config.json')
+    content => template('consul_replicate/consul_replicate_config.json.erb')
   }
 }

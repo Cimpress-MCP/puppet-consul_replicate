@@ -14,4 +14,6 @@ class consul_replicate::populate_hash {
   if !has_key($merged_config_hash, 'prefix') {
     fail( 'prefix value must be provided in config_hash or hiera_config_hash' )
   }
+
+  validate_hash($merged_config_hash)
 }

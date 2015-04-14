@@ -1,6 +1,11 @@
 # See README.md for details
 class consul_replicate::params {
-  $version = '0.2.0'
+  # Basic config
+  $version    = '0.2.0'
+  $user       = 'creplicate'
+  $group      = 'creplicate'
+  $monitoring = false
+  $sensu_subs = []
 
   case $::architecture {
     'x86_64', 'amd64': { $arch = 'amd64' }
