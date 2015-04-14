@@ -64,7 +64,17 @@ class { 'consul_replicate':
 
 ### Monitoring
 
-This module includes basic sensu checks for monitoring.
+This module includes basic sensu checks for monitoring. Monitoring can be enabled by setting the `monitoring` variable to `true`. Sensu subscriber tags can be optionally added.
+
+```puppet
+class { 'consul_replicate':
+	monitoring => true,
+	sensu_subs => ['dev','test'],
+	...
+}
+
+```
+
 
 What this module affects
 ------------------------
