@@ -2,16 +2,6 @@ require 'spec_helper'
 
 describe 'consul_replicate' do
 
-  Puppet[:parser] = 'future'
-
-  RSpec.configure do |c|
-    c.default_facts = {
-      :architecture    => 'amd64',
-      :operatingsystem => 'Ubuntu',
-      :lsbdistrelease  => '14.04',
-    }
-  end
-
   let :default_params do {
     :config_hash => {
       'consul' => "127.0.0.1:8500",

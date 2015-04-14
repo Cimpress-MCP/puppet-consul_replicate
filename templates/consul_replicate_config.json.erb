@@ -1,0 +1,15 @@
+{
+  "check-consul-process-count": {
+    "command": "/etc/sensu/plugins/processes/check-procs.rb -p consul-replicate -c 1 -C 1",
+    "standalone": true,
+    <% if !scope.lookupvar('consul_replicate::sensu_subs').empty? %>
+    "subscribers": [
+      <%= scope.lookupvar('consul_replicate::sensu_subs').map{ |x| x.inspect }.join(', ') %>
+    ],
+    <% end %>
+    "handlers": [
+      "default"
+    ],
+    "interval": 60
+  }
+}
