@@ -4,9 +4,7 @@
     "standalone": true,
     <% if !scope.lookupvar('consul_replicate::sensu_subs').empty? %>
     "subscribers": [
-      <% if scope.lookupvar('consul_replicate::sensu_subs').instance_of?(Array) %>
       <%= scope.lookupvar('consul_replicate::sensu_subs').map{ |x| x.inspect }.join(', ') %>
-      <% end %>
     ],
     <% end %>
     "handlers": [
