@@ -8,9 +8,9 @@ class consul_replicate::monitoring::sensu {
   }
 
   exec { 'Ensure check-procs.rb is present':
-    command => 'test -s /etc/sensu/plugins/processes/check-procs.rb',
+    command => '/bin/true',
     path    => '/usr/bin:/usr/local/bin:/bin',
-    # onlyif file does not exist
+    onlyif  => 'test -s /etc/sensu/plugins/processes/check-procs.rb'
     require => Package['sensu']
   } ->
 
