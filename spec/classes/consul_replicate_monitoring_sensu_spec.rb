@@ -22,4 +22,5 @@ describe 'consul_replicate::monitoring::sensu', :type => :module do
 
   end
 
+
 end
