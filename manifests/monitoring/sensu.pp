@@ -1,13 +1,17 @@
 # See README.md for details
 class consul_replicate::monitoring::sensu {
 
-  package { 'sensu':
-    ensure => installed
-  } ->
+  if !defined(Package['sensu']) {
+    package { 'sensu':
+      ensure => installed
+    }
+  }
 
-  file { 'Ensure check-procs.rb is present':
-    ensure => file,
-    path   => '/etc/sensu/plugins/processes/check-procs.rb'
+  exec { 'Ensure check-procs.rb is present':
+    command => '/bin/true',
+    path    => '/usr/bin:/usr/local/bin:/bin',
+    onlyif  => 'test -s /etc/sensu/plugins/processes/check-procs.rb',
+    require => Package['sensu']
   } ->
 
   file { '/etc/sensu/conf.d/consul_replicate_config.json':
