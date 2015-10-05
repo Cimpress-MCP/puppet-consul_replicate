@@ -7,7 +7,7 @@ setgid <%= scope.lookupvar('consul_replicate::group') %>
 chdir <%= scope.lookupvar('consul_replicate::bin_dir') %>
 
 respawn
-respawn limit 10 10
+respawn limit 5 20
 kill timeout 10
 
 script
@@ -17,4 +17,7 @@ script
 	exec consul lock -verbose $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %> -log-level debug
 end script
 
+# `respawn limit` is set to 5 tries within 20 seconds so if the process restarts
+# more than 5 times within this time frame it will remain stopped.
+# This behavior is intentional to prevent false-negatives on monitoring applications
 post-stop exec sleep 3
