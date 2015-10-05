@@ -16,3 +16,5 @@ script
 	fi
 	exec consul lock -verbose $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %> -log-level debug
 end script
+
+post-stop exec sleep 3
