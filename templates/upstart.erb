@@ -7,7 +7,6 @@ setgid <%= scope.lookupvar('consul_replicate::group') %>
 chdir <%= scope.lookupvar('consul_replicate::bin_dir') %>
 
 respawn
-respawn limit 10 10
 kill timeout 10
 
 script
@@ -15,4 +14,17 @@ script
 		TOKEN_PARAM="-token <%= scope.lookupvar('consul_replicate::populate_hash::acl_token') %>"
 	fi
 	exec consul lock -verbose $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %> -log-level debug
+end script
+
+env SLEEP_TIME=1
+post-stop script
+goal=`initctl status $UPSTART_JOB | awk '{print $2}' | cut -d '/' -f 1`
+	if [ $goal != "stop" ]; then
+			sleep $SLEEP_TIME
+			NEW_SLEEP_TIME=`expr 2 * $SLEEP_TIME`
+			if [ $NEW_SLEEP_TIME -ge 90 ]; then
+					NEW_SLEEP_TIME=90
+			fi
+			initctl set-env SLEEP_TIME=$NEW_SLEEP_TIME
+	fi
 end script
