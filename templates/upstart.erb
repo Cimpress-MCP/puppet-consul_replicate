@@ -16,6 +16,7 @@ script
 	exec consul lock -verbose $TOKEN_PARAM locks/replicate consul-replicate -config <%= scope.lookupvar('consul_replicate::config_dir') %> -log-level debug
 end script
 
+env SLEEP_TIME=1
 post-stop script
 goal=`initctl status $UPSTART_JOB | awk '{print $2}' | cut -d '/' -f 1`
 	if [ $goal != "stop" ]; then
