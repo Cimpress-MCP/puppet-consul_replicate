@@ -18,10 +18,10 @@ end script
 
 env SLEEP_TIME=1
 post-stop script
-goal=`initctl status $UPSTART_JOB | awk '{print $2}' | cut -d '/' -f 1`
+goal=$(initctl status "$UPSTART_JOB" | awk '{print $2}' | cut -d '/' -f 1)
 	if [ $goal != "stop" ]; then
 			sleep $SLEEP_TIME
-			NEW_SLEEP_TIME=`expr 2 * $SLEEP_TIME`
+			NEW_SLEEP_TIME=$((2 * SLEEP_TIME))
 			if [ $NEW_SLEEP_TIME -ge 90 ]; then
 					NEW_SLEEP_TIME=90
 			fi
